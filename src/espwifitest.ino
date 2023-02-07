@@ -1,3 +1,4 @@
+#include "servo.hh"
 /* #include "WiFiManager.hh"
 
 String ssid = "WiFi";
@@ -97,6 +98,8 @@ void toggleLED() {
     digitalWrite(LED_BUILTIN, pinStatus);
 } */
 
+// Smart Config Working
+/*
 #include <ESP8266WiFi.h>
 
 void setup() {
@@ -114,5 +117,105 @@ void loop() {
     } else {
         Serial.println("Smart Config Done!");
         delay(5000);
+    }
+}
+*/
+
+/*
+#include <Arduino.h>
+#include <Servo.h>
+
+Servo MG995_Servo;
+
+void setup() {
+    MG995_Servo.attach(D8);
+    Serial.begin(9600);
+}
+
+void loop() {
+    for (float i = 1000; i <= 4000; i+=10) {
+        MG995_Servo.writeMicroseconds(i);
+        Serial.println(i);
+        delay(100);
+    }
+    for (int i = 4000; i >= 1000; i-=10) {
+        MG995_Servo.writeMicroseconds(i);
+        Serial.println(i);
+        delay(100);
+    }
+}
+
+*/
+
+#include <Arduino.h>
+Servo servo(D8);
+
+/*
+    For 0-255
+    0degree = 5
+    180 degree = 33
+*/
+void setup() {
+    Serial.begin(9600);
+    servo.setMaxAngle(216);
+    // Serial.begin(9600);
+    // pinMode(D8, OUTPUT);
+    // analogWriteFreq(50);
+    // analogWriteResolution(16);
+    // analogWriteRange(2048);
+    // analogWrite(D8, 40);
+    // Serial.println("Waiting!");
+    // delay(5000);
+    // Serial.println("Starting!");
+}
+
+void loop() {
+    /*
+        2048 steps
+        266 end
+        36 begin
+    */
+    // for (int i = 40; i > 0 ; i--) {
+    //     analogWrite(D8, i);
+    //     Serial.println(i);
+    //     delay(1000);
+    // }
+
+    // for (int i = 5; i < 33; i++) {
+    // for (int i = 36; i < 266; i++) {
+    //     analogWrite(D8, i);
+    //     Serial.println(i);
+    //     delay(10);
+    // }
+    // delay(1000);
+    // // for (int i = 32;  i >= 4;  i--) {
+    // for (int i = 266; i > 36; i--) {
+    //     analogWrite(D8, i);
+    //     Serial.println(i);
+    //     delay(10);
+    // }
+    // delay(1000);
+
+    // Serial.print("Enter Value:\n");
+    // String s;
+    // while (s.indexOf("\n") == -1) {
+    //     s += Serial.readString();
+    // }
+    // // String s = Serial.readString();
+    // int val = s.toInt();
+    // Serial.print("Applying ");
+    // Serial.println(val);
+    // servo.setAngle(val);
+
+    for (int i = 0; i < 216; i += 1) {
+        servo.setAngle(i);
+        Serial.println(i);
+        delay(10);
+    }
+
+    for (int i = 216; i > 0; i -= 1) {
+        servo.setAngle(i);
+        Serial.println(i);
+        delay(10);
     }
 }
