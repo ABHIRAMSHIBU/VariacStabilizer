@@ -1,4 +1,5 @@
-#include "servo.hh"
+// #include "servo.hh"
+#include "analogmux.hh"
 /* #include "WiFiManager.hh"
 
 String ssid = "WiFi";
@@ -148,7 +149,8 @@ void loop() {
 */
 
 #include <Arduino.h>
-Servo servo(D8);
+// Servo servo(D8);
+AnalogMux analogMux(D0, D1, D2, D3, D4);
 
 /*
     For 0-255
@@ -157,7 +159,9 @@ Servo servo(D8);
 */
 void setup() {
     Serial.begin(9600);
-    servo.setMaxAngle(216);
+    analogMux.begin();
+    // analogMux.select(0);
+    // servo.setMaxAngle(216);
     // Serial.begin(9600);
     // pinMode(D8, OUTPUT);
     // analogWriteFreq(50);
@@ -207,15 +211,32 @@ void loop() {
     // Serial.println(val);
     // servo.setAngle(val);
 
-    for (int i = 0; i < 216; i += 1) {
-        servo.setAngle(i);
-        Serial.println(i);
-        delay(10);
-    }
+    // for (int i = 0; i < 216; i += 1) {
+    //     servo.setAngle(i);
+    //     Serial.println(i);
+    //     delay(10);
+    // }
 
-    for (int i = 216; i > 0; i -= 1) {
-        servo.setAngle(i);
-        Serial.println(i);
-        delay(10);
+    // for (int i = 216; i > 0; i -= 1) {
+    //     servo.setAngle(i);
+    //     Serial.println(i);
+    //     delay(10);
+    // }
+    float values[16];
+    analogMux.enable();
+    for (int i = C0; i < C15 + 1; i++) {
+        analogMux.read((MUX_NAME_T)i);
+        values[i] = analogMux.getVoltage();
     }
+    analogMux.disable();
+    Serial.println("");
+    Serial.print("Values: ");
+    for (int i = 0; i < 16; i++) {
+        Serial.print(i);
+        Serial.print("->");
+        Serial.print(values[i]);
+        Serial.print("\t");
+    }
+    Serial.println("");
+    delay(500);
 }
