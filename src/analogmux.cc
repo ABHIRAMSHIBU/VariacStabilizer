@@ -47,12 +47,12 @@ bool AnalogMux::select(MUX_NAME_T port) {
         _port   = _port >> 1;
         digitalWrite(S[i], bits[i]);
     }
-    Serial.print("Debug:AnalogMux:");
-    for (int i = 0; i < 4; i++) {
-        Serial.print(i);
-        Serial.print("\t");
-    }
-    Serial.println();
+    // Serial.print("Debug:AnalogMux:");
+    // for (int i = 0; i < 4; i++) {
+    //     Serial.print(bits[i]);
+    //     Serial.print("\t");
+    // }
+    // Serial.println();
     return true;
 }
 

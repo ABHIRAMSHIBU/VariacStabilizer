@@ -25,7 +25,7 @@ class AnalogMux {
     int enablePin    = {};
     int value        = {};
     int minValue     = 16;
-    float maxVoltage = 3;
+    float maxVoltage = 3.03;
     bool enabled     = {};
 
    public:

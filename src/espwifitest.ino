@@ -148,18 +148,31 @@ void loop() {
 
 */
 
-#include <Arduino.h>
+// #include <Arduino.h>
 // Servo servo(D8);
-AnalogMux analogMux(D0, D1, D2, D3, D4);
+// AnalogMux analogMux(D0, D1, D2, D3, D4);
+
+// #include <LiquidCrystal_I2C.h>
+// LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+#include <lcd.hh>
 
 /*
     For 0-255
     0degree = 5
     180 degree = 33
 */
+Lcd lcd;
 void setup() {
-    Serial.begin(9600);
-    analogMux.begin();
+    lcd.getLcd()->setCursor(0, 0);
+    lcd.getLcd()->backlight();
+    lcd.getLcd()->print("Hello");
+    // lcd.setCursor(0, 2);
+    // lcd.print("Arduino LCM IIC 2004");
+    // lcd.setCursor(2, 3);
+    // lcd.print("Power By Ec-yuan!");
+    // Serial.begin(9600);
+    // analogMux.begin();
     // analogMux.select(0);
     // servo.setMaxAngle(216);
     // Serial.begin(9600);
@@ -222,21 +235,21 @@ void loop() {
     //     Serial.println(i);
     //     delay(10);
     // }
-    float values[16];
-    analogMux.enable();
-    for (int i = C0; i < C15 + 1; i++) {
-        analogMux.read((MUX_NAME_T)i);
-        values[i] = analogMux.getVoltage();
-    }
-    analogMux.disable();
-    Serial.println("");
-    Serial.print("Values: ");
-    for (int i = 0; i < 16; i++) {
-        Serial.print(i);
-        Serial.print("->");
-        Serial.print(values[i]);
-        Serial.print("\t");
-    }
-    Serial.println("");
-    delay(500);
+    // float values[16];
+    // analogMux.enable();
+    // for (int i = C0; i < C15 + 1; i++) {
+    //     analogMux.read((MUX_NAME_T)i);
+    //     values[i] = analogMux.getVoltage();
+    // }
+    // analogMux.disable();
+    // Serial.println("");
+    // Serial.print("Values: ");
+    // for (int i = 0; i < 16; i++) {
+    //     Serial.print(i);
+    //     Serial.print("->");
+    //     Serial.print(values[i]);
+    //     Serial.print("\t");
+    // }
+    // Serial.println("");
+    // delay(500);
 }
